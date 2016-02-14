@@ -472,7 +472,7 @@ crudini --set /etc/nova/nova.conf DEFAULT enabled_apis osapi_compute,metadata
 crudini --set /etc/nova/nova.conf DEFAULT my_ip $MGMT_IP
 crudini --set /etc/nova/nova.conf DEFAULT network_api_class nova.network.neutronv2.api.API
 crudini --set /etc/nova/nova.conf DEFAULT security_group_api neutron
-crudini --set /etc/nova/nova.conf DEFAULT linuxnet_interface_driver nova.network.linux_net.NeutronLinuxBridgeInterfaceDriver
+crudini --set /etc/nova/nova.conf DEFAULT linuxnet_interface_driver nova.network.linux_net.NeutronOVSInterfaceDriver
 crudini --set /etc/nova/nova.conf DEFAULT firewall_driver nova.virt.firewall.NoopFirewallDriver
 crudini --set /etc/nova/nova.conf DEFAULT vnc_enabled True
 crudini --set /etc/nova/nova.conf DEFAULT vncserver_listen 0.0.0.0
