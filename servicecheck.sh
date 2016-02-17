@@ -10,8 +10,10 @@ echo -e "1.mysql\n2.rabbitmq-server\n3.apache2\n4.glance-registry\n5.glance-api\
 26.ceilometer-api\n27.ceilometer-collector\n28.ceilometer-agent-central\n29.ceilometer-agent-notification\n30.ceilometer-alarm-evaluator\n\
 31.ceilometer-agent-compute\n32.ceilometer-alarm-notifier\n33.mongodb\n34.libvirt-bin\n35.qemu-kvm\n36.memcached"
 echo "Select the service you need to start/stop/restart or to know its status"
+echo "[For example: press '1' to perform action on mysql service]"
 read option
 echo "Enter the action you need to perform on the selected service [start|stop|status|restart|force-reload|systemd-start]"
+echo "For example type 'status' to check the status of the selected service"
 read -r action
 action=$action
 case $option in
