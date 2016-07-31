@@ -17,11 +17,11 @@ apt-get -y install mariadb-server python-mysqldb
 touch /etc/mysql/conf.d/mysqld_openstack.cnf
 crudini --set /etc/mysql/conf.d/mysqld_openstack.cnf mysqld bind-address 0.0.0.0
 crudini --set /etc/mysql/conf.d/mysqld_openstack.cnf mysqld default-storage-engine innodb
-echo "innodb_file_per_table" >> /etc/mysql/conf.d/mysqld_openstack.cnf
 crudini --set /etc/mysql/conf.d/mysqld_openstack.cnf mysqld collation-server utf8_general_ci
 crudini --set /etc/mysql/conf.d/mysqld_openstack.cnf mysqld init-connect "'SET NAMES utf8'"
 crudini --set /etc/mysql/conf.d/mysqld_openstack.cnf mysqld character-set-server utf8
-#sed -i '3 a innodb_file_per_table' /etc/mysql/conf.d/mysqld_openstack.cnf 
+echo "innodb_file_per_table" >> /etc/mysql/conf.d/mysqld_openstack.cnf
+
 service mysql restart
 echo "MYSQL Installation Completed!"
 
