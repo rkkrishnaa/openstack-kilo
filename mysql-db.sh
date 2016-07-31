@@ -9,6 +9,15 @@ CEILOMETER_PASS=P@ssw0rd
 ADMIN_PASS=P@ssw0rd
 DEMO_PASS=P@ssw0rd
 
+apt-get -y update && apt-get -y dist-upgrade
+apt-get -y install crudini
+
+echo "Openstack Packages Installation Started"
+apt-get -y install ubuntu-cloud-keyring
+echo "deb http://ubuntu-cloud.archive.canonical.com/ubuntu" "trusty-updates/kilo main" > /etc/apt/sources.list.d/cloudarchive-kilo.list
+apt-get -y update && apt-get -y dist-upgrade
+echo "Openstack Packages Installation Completed"
+
 echo "MYSQL Installation Started"
 echo mariadb-server-5.5 mysql-server/root_password password ${DBPASS} | debconf-set-selections
 echo mariadb-server-5.5 mysql-server/root_password_again password ${DBPASS} | debconf-set-selections
@@ -45,3 +54,13 @@ GRANT ALL PRIVILEGES ON cinder.* TO 'cinder'@'%' IDENTIFIED BY '$CINDER_DBPASS';
 GRANT ALL PRIVILEGES ON heat.* TO 'heat'@'localhost' IDENTIFIED BY '$HEAT_DBPASS';
 GRANT ALL PRIVILEGES ON heat.* TO 'heat'@'%' IDENTIFIED BY '$HEAT_DBPASS';
 EOF
+
+echo "MongoDB Installation Started"
+apt-get -y install mongodb-server mongodb-clients python-pymongo
+sed -i '3 a smallfiles = true' /etc/mongodb.conf
+sed -i '3 a bind_ip = 0.0.0.0' /etc/mongodb.conf
+service mongodb stop
+rm /var/lib/mongodb/journal/prealloc.*
+service mongodb start
+mongo --host controller --eval 'db = db.getSiblingDB("ceilometer");db.addUser({user: "ceilometer",pwd: "$CEILOMETER_DBPASS",roles: [ "readWrite", "dbAdmin" ]})'
+echo "MongoDB Installation Completed!"
