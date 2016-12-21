@@ -596,7 +596,7 @@ service openvswitch-switch restart
 service nova-compute restart
 service neutron-plugin-openvswitch-agent restart
 echo "Neutron Layer-3 agent Configuration"
-crudini --set /etc/neutron/l3_agent.ini DEFUALT interface_driver neutron.agent.linux.interface.OVSInterfaceDriver
+crudini --set /etc/neutron/l3_agent.ini DEFAULT interface_driver neutron.agent.linux.interface.OVSInterfaceDriver
 crudini --set /etc/neutron/l3_agent.ini DEFAULT external_network_bridge '='
 crudini --set /etc/neutron/l3_agent.ini DEFAULT router_delete_namespaces True
 crudini --set /etc/neutron/l3_agent.ini DEFAULT verbose True
